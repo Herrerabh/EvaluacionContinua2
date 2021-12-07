@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">EvaluacionContinua2</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Sing in</string>
+    <string name="login_cancel_button">Cancel</string>
+    <string name="login_error_message">password must have 6 characters</string>
+    <string name="search_title">Search</string>
+    <string name="filter_title">Title</string>
+    <string name="product_title">Title</string>
+    <string name="product_description">Hi,this is a new product.</string>
 </resources>
