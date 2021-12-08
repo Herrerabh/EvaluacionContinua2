@@ -14,6 +14,46 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.evaluacioncontinua2.network.ProductEntry;
+
 public class HomeFragment extends Fragment {
 
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view=inflater.inflate(R.layout.home_fragment,container, false);
+
+        setUpToolbar(view);
+
+        RecyclerView recyclerView=view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),1, GridLayoutManager.VERTICAL,false));
+        ProductCardRecyclerViewAdapter adapter=new ProductCardRecyclerViewAdapter(
+                ProductEntry.initProductEntryList(getResources()));
+        recyclerView.setAdapter(adapter);
+        int largePadding =getResources().getDimensionPixelSize(R.dimen.product_grid_spacing);
+        int smallPadding= getResources().getDimensionPixelSize(R.dimen.product_grid_spacing_small);
+        recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
+
+        return view;
+    }
+
+    private void setUpToolbar(View view){
+        Toolbar toolbar=view.findViewById(R.id.app_bar);
+        AppCompatActivity activity =(AppCompatActivity) getActivity();
+        if(activity!=null){
+            activity.setSupportActionBar(toolbar);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater menuInflater){
+        menuInflater.inflate(R.menu.toolbar_menu,menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
 }
